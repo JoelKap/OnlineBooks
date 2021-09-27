@@ -25,9 +25,9 @@ namespace OnlineBooks.Service.Implementation
             return await _subscriptionDataService.DeleteSubscription(subscriptionId);
         }
 
-        public Task<IEnumerable<OnlineUserModel>> GetUserSubscriptions(Guid userId, string email)
+        public Task<OnlineUserModel> GetUserSubscriptions(Guid userId)
         {
-            return _subscriptionDataService.GetUserSubscriptions(userId, email);
+            return _subscriptionDataService.GetUserSubscriptions(userId);
         }
     }
 }

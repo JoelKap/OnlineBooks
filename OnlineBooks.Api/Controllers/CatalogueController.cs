@@ -23,7 +23,7 @@ namespace OnlineBooks.Api.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetCatalogues()
         {
-            return Ok(await _catalogueService.GetCatalogue());
+            return Ok(await _catalogueService.GetCatalogues());
         }
 
         [HttpPost()]

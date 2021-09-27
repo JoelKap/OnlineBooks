@@ -14,12 +14,12 @@ namespace OnlineBooks.DataAccess.DTO
 
         public Guid SubscriptionId { get; set; }
         public Guid UserId { get; set; }
-        public Guid CatalogId { get; set; }
+        public Guid CatalogueId { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool IsDeleted { get; set; }
         public string Reference { get; set; }
 
-        public virtual Catalogue Catalog { get; set; }
+        public virtual Catalogue Catalogue { get; set; }
         public virtual OnlineUser User { get; set; }
         public virtual ICollection<Unsubscribe> Unsubscribes { get; set; }
     }

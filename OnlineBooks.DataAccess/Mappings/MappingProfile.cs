@@ -14,22 +14,30 @@ namespace OnlineBooks.DataAccess.Mappings
                 cfg.CreateMap<OnlineUser, OnlineUserModel>()
                 .ForMember(dest => dest.UserType, src => src.MapFrom(o => o.OnlineUserType)).ReverseMap();
 
-                //cfg.CreateMap<OnlineUser, OnlineUserModel>().ReverseMap();
+                cfg.CreateMap<OnlineUser, OnlineUserModel>()
+                .ForMember(dest => dest.Subscriptions, src => src.MapFrom(o => o.Subscriptions)).ReverseMap();
+
                 cfg.CreateMap<List<OnlineUser>, List<OnlineUserModel>>().ReverseMap();
 
                 cfg.CreateMap<Book, BookModel>().ReverseMap(); 
                 cfg.CreateMap<List<Book>, List<BookModel>>().ReverseMap();
 
-                cfg.CreateMap<Catalogue, CatalogueModel>().ReverseMap();
+                cfg.CreateMap<Catalogue, CatalogueModel>()
+                .ForMember(dest => dest.BookCatalogues, src => src.MapFrom(o => o.BookCatalogues)).ReverseMap();
+
                 cfg.CreateMap<List<Catalogue>, List<CatalogueModel>>().ReverseMap();
 
                 cfg.CreateMap<OnlineUserType, OnlineUserTypeModel>().ReverseMap(); 
                 cfg.CreateMap<List<OnlineUserType>, List<OnlineUserTypeModel>>().ReverseMap();
 
+                cfg.CreateMap<Subscription, SubscriptionModel>().ReverseMap();
+                cfg.CreateMap<List<Subscription>, List<SubscriptionModel>>().ReverseMap();
+
                 cfg.CreateMap<Unsubscribe, UnsubscribeModel>().ReverseMap();
                 cfg.CreateMap<List<Unsubscribe>, List<UnsubscribeModel>>().ReverseMap();
 
-                cfg.CreateMap<BookCatalogue, BookCatalogueModel>().ReverseMap();
+                cfg.CreateMap<BookCatalogue, BookCatalogueModel>()
+               .ForMember(dest => dest.book, src => src.MapFrom(o => o.Book)).ReverseMap();
                 cfg.CreateMap<List<BookCatalogue>, List<BookCatalogueModel>>().ReverseMap();
             });
             IMapper mapper = config.CreateMapper();

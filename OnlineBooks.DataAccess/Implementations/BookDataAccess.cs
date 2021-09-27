@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using OnlineBooks.DataAccess.Contracts;
 using OnlineBooks.DataAccess.DTO;
 using OnlineBooks.Model;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OnlineBooks.DataAccess.Implementations
 {
-    public class BookDataAccess: IBookDataAccess
+    public class BookDataAccess : IBookDataAccess
     {
         private readonly OnlineBooksContext _onlineBooksContext;
         private readonly IMapper _mapper;
@@ -63,5 +64,29 @@ namespace OnlineBooks.DataAccess.Implementations
             return false;
         }
 
+        public async Task<IEnumerable<BookModel>> GetBookByCatalogueId(Guid subscriptionId, Guid userId)
+        {
+            var list = new List<BookModel>();
+            var bookIds = new List<Guid>();
+
+            List<Subscription> subsDto = _onlineBooksContext.Subscriptions
+                .Include(x=> x.Catalogue)
+                .Include(x => x.Catalogue.BookCatalogues)
+                .Include(x=> x.Unsubscribes.Where(x=> x.SubscriptionId == subscriptionId && x.UserId == userId && x.IsDeleted == false)).ToList()
+                .Where(x => x.SubscriptionId == subscriptionId && x.UserId == userId && x.IsDeleted == false)
+                .ToList();
+
+            for (int i = 0; i < subsDto.Count; i++)
+            {
+                var unsubs = subsDto[i].Unsubscribes.ToList();
+                for (int k = 0; k < unsubs.Count; k++)
+                {
+                    var bookDto = _onlineBooksContext.Books.FirstOrDefault(x => x.IsDeleted == false && x.BookId == unsubs[k].BookId);
+                    var bookModel = _mapper.Map<Book, BookModel>(bookDto);
+                    list.Add(bookModel);
+                }
+            }
+            return list;
+        }
     }
 }

@@ -30,6 +30,11 @@ namespace OnlineBooks.Service.Implementation
             return _bookCatalogueBookAccess.GetBookCatalogues();
         }
 
+        public Task<IEnumerable<BookCatalogueModel>> GetBooksByCatalogues(Guid catalogueId)
+        {
+            return _bookCatalogueBookAccess.GetBooksByCatalogues(catalogueId);
+        }
+
         public async Task<bool> UpdateBookCatalogue(BookCatalogueModel request)
         {
             return await _bookCatalogueBookAccess.UpdateBookCatalogue(request);

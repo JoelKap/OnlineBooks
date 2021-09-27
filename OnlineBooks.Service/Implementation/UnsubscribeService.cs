@@ -10,12 +10,12 @@ namespace OnlineBooks.Service.Implementation
         private IUnsubscribeDataAccess _unsubscribeDataAccess;
         public UnsubscribeService(IUnsubscribeDataAccess unsubscribeDataAccess)
         {
-            _unsubscribeDataAccess = unsubscribeDataAccess;
+            _unsubscribeDataAccess = unsubscribeDataAccess; 
         }
 
-        public Task<bool> UnsubscribeUser(Guid userId, Guid SubscriptionId)
+        public Task<bool> UnsubscribeUser(Guid userId, Guid SubscriptionId, Guid bookId)
         {
-            return _unsubscribeDataAccess.UnsubscribeUser(userId, SubscriptionId);
+            return _unsubscribeDataAccess.UnsubscribeUser(userId, SubscriptionId, bookId);
         }
     }
 }

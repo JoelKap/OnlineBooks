@@ -18,10 +18,10 @@ namespace OnlineBooks.Api.Controllers
             _subscribeService = subscribeService;
         }
 
-        [HttpGet()]
-        public async Task<IActionResult> Unsubscribe(Guid userId, Guid subscriptionId)
+        [HttpGet("{userId}/{subscriptionId}/{bookId}")]
+        public async Task<IActionResult> Unsubscribe(Guid userId, Guid subscriptionId, Guid bookId)
         {
-            return Ok(await _subscribeService.UnsubscribeUser(userId, subscriptionId));
+            return Ok(await _subscribeService.UnsubscribeUser(userId, subscriptionId, bookId));
         }
     }
 }

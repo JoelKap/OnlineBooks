@@ -18,10 +18,10 @@ namespace OnlineBooks.Api.Controllers
             _subscriptionService = subcriptionServie;
         }
 
-        [HttpGet()]
-        public async Task<IActionResult> GetUserSubscriptions(Guid userId, string? email)
+        [HttpGet("{userId}/")]
+        public async Task<IActionResult> GetUserSubscriptions(Guid userId)
         {
-            return Ok(await _subscriptionService.GetUserSubscriptions(userId, email));
+            return Ok(await _subscriptionService.GetUserSubscriptions(userId));
         }
 
         [HttpPost()]
@@ -31,9 +31,9 @@ namespace OnlineBooks.Api.Controllers
         }
 
 
-        [HttpDelete()]
+        [HttpDelete("{subscriptionId}/")]
         public async Task<IActionResult> DeleteSubscription(Guid subscriptionId)
-        {
+            {
             return Ok(await _subscriptionService.DeleteSubscription(subscriptionId));
         }
     }

@@ -25,6 +25,13 @@ namespace OnlineBooks.Api.Controllers
             return Ok(await _bookService.GetBooks());
         }
 
+        [HttpGet("{subscriptionId}/{userId}")]
+        public async Task<IActionResult> GetBookByCatalogueId(Guid subscriptionId, Guid userId)
+        {
+            return Ok(await _bookService.GetBookByCatalogueId(subscriptionId, userId));
+        }
+
+
         [HttpPost()]
         public async Task<IActionResult> CreateBook([FromBody] BookModel request)
         {

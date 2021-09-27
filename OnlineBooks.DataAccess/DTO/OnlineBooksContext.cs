@@ -24,7 +24,6 @@ namespace OnlineBooks.DataAccess.DTO
         public virtual DbSet<OnlineUserType> OnlineUserTypes { get; set; }
         public virtual DbSet<Subscription> Subscriptions { get; set; }
         public virtual DbSet<Unsubscribe> Unsubscribes { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>(entity =>
@@ -33,9 +32,9 @@ namespace OnlineBooks.DataAccess.DTO
 
                 entity.Property(e => e.BookId).ValueGeneratedNever();
 
-                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
+                entity.Property(e => e.Author).HasMaxLength(50);
 
-                entity.Property(e => e.Description).HasMaxLength(50);
+                entity.Property(e => e.CreatedAt).HasColumnType("datetime");
 
                 entity.Property(e => e.Name)
                     .IsRequired()
@@ -138,9 +137,9 @@ namespace OnlineBooks.DataAccess.DTO
                     .IsRequired()
                     .HasMaxLength(50);
 
-                entity.HasOne(d => d.Catalog)
+                entity.HasOne(d => d.Catalogue)
                     .WithMany(p => p.Subscriptions)
-                    .HasForeignKey(d => d.CatalogId)
+                    .HasForeignKey(d => d.CatalogueId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Subscription_Catalogue");
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using OnlineBooks.DataAccess.Contracts;
 using OnlineBooks.DataAccess.DTO;
 using OnlineBooks.Model;
@@ -48,7 +49,7 @@ namespace OnlineBooks.DataAccess.Implementations
         public async Task<IEnumerable<CatalogueModel>> GetCatalogues()
         {
             var catalogues = new List<CatalogueModel>();
-            var cataloguesDto = _onlineBooksContext.Catalogues.Where(x => x.IsDeleted == false).ToList();
+            var cataloguesDto = _onlineBooksContext.Catalogues.Include(x => x.BookCatalogues).Where(x=> x.IsDeleted == false).ToList();
             for (int i = 0; i < cataloguesDto.Count; i++)
             {
                 var catalogue = _mapper.Map<Catalogue, CatalogueModel>(cataloguesDto[i]);

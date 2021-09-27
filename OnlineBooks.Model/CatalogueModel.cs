@@ -10,6 +10,7 @@ namespace OnlineBooks.Model
         public Decimal Price { get; set; }  
         public DateTime CreatedAt { get; set; } 
         public bool IsDeleted { get; set; } 
+        public List<BookCatalogueModel> BookCatalogues { get; set; }
         public List<BookModel> Books { get; set; }
     }
 }

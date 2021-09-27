@@ -24,6 +24,13 @@ namespace OnlineBooks.Api.Controllers
             return Ok(await _bookCatalogueService.GetBookCatalogues());
         }
 
+        [AllowAnonymous]
+        [HttpGet("{catalogueId}")]
+        public async Task<IActionResult> GetBookCatalogues(Guid catalogueId)
+        {
+            return Ok(await _bookCatalogueService.GetBooksByCatalogues(catalogueId));
+        }
+
         [HttpPost()]
         public async Task<IActionResult> CreateBookCatalogue([FromBody] BookCatalogueModel request)
         {

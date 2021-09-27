@@ -84,6 +84,13 @@ namespace OnlineBooks.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.AllowAnyOrigin();
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

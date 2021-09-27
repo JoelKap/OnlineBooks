@@ -27,7 +27,7 @@ namespace OnlineBooks.Service.Implementation
             return await _catalogueDataService.DeleteCatalogue(catalogueId);
         }
 
-        public async Task<IEnumerable<CatalogueModel>> GetCatalogue()
+        public async Task<IEnumerable<CatalogueModel>> GetCatalogues()
         {
             return await _catalogueDataService.GetCatalogues();
         }

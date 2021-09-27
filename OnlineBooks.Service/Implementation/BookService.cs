@@ -27,6 +27,11 @@ namespace OnlineBooks.Service.Implementation
             return await _bookDataService.DeleteBook(bookId);
         }
 
+        public async Task<IEnumerable<BookModel>> GetBookByCatalogueId(Guid subscriptionId, Guid userId)
+        {
+            return await _bookDataService.GetBookByCatalogueId(subscriptionId, userId);
+        }
+
         public async Task<IEnumerable<BookModel>> GetBooks()
         {
             return await _bookDataService.GetBooks();

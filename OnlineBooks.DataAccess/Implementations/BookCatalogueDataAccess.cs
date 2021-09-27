@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using OnlineBooks.DataAccess.Contracts;
 using OnlineBooks.DataAccess.DTO;
 using OnlineBooks.Model;
@@ -54,6 +55,21 @@ namespace OnlineBooks.DataAccess.Implementations
                 bookCatalogues.Add(bookCat);
             }
             return bookCatalogues;
+        }
+
+        public async Task<IEnumerable<BookCatalogueModel>> GetBooksByCatalogues(Guid catalogueId)
+        {
+            var books = new List<BookCatalogueModel>();
+            var bookCatsDto = _onlineBooksContext.BookCatalogues
+                .Include(x=> x.Book)
+                .Where(x=> x.CatalogueId == catalogueId && x.IsDeleted == false).ToList();
+
+            for (int i = 0; i < bookCatsDto.Count; i++)
+            {
+                var bookCat = _mapper.Map<BookCatalogue, BookCatalogueModel>(bookCatsDto[i]);
+                books.Add(bookCat);
+            }
+            return books;
         }
 
         public async Task<bool> UpdateBookCatalogue(BookCatalogueModel request)
