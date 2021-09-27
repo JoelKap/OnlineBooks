@@ -30,6 +30,7 @@ namespace OnlineBooks.Api.Controllers
             return Ok( _userService.GetUserByEmail(email));
         }
 
+        [AllowAnonymous]
         [HttpPost()]
         public async Task<IActionResult> CreateUser([FromBody] OnlineUserModel request)
         {

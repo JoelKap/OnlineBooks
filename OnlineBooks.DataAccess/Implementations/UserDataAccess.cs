@@ -40,6 +40,10 @@ namespace OnlineBooks.DataAccess.Implementations
 
         public async Task<bool> CreateUser(OnlineUserModel request)
         {
+            request.UserId = Guid.NewGuid();
+            request.OnlineUserTypeId = _onlineBooksContext.OnlineUserTypes.FirstOrDefault(x => x.IsDeleted == false && x.OnlineUserTypeName == "Internal_User").OnlineUserTypeId;
+            request.IsDeleted = false;
+            request.CreatedAt = DateTime.Now;
             var userDto = _mapper.Map<OnlineUserModel, OnlineUser>(request);
             _onlineBooksContext.OnlineUsers.Add(userDto);
            var response = _onlineBooksContext.SaveChanges();
