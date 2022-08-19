@@ -10,6 +10,6 @@ namespace OnlineBooks.Model
         public List<Guid> BookIds { get; set; } 
         public DateTime CreatedAt { get; set; }
         public bool IsDeleted { get; set; }
-        public BookModel book { get; set; }
+        public BookModel Book { get; set; }
     } 
 }

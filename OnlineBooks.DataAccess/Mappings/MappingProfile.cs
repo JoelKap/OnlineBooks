@@ -37,7 +37,7 @@ namespace OnlineBooks.DataAccess.Mappings
                 cfg.CreateMap<List<Unsubscribe>, List<UnsubscribeModel>>().ReverseMap();
 
                 cfg.CreateMap<BookCatalogue, BookCatalogueModel>()
-               .ForMember(dest => dest.book, src => src.MapFrom(o => o.Book)).ReverseMap();
+               .ForMember(dest => dest.Book, src => src.MapFrom(o => o.Book)).ReverseMap();
                 cfg.CreateMap<List<BookCatalogue>, List<BookCatalogueModel>>().ReverseMap();
             });
             IMapper mapper = config.CreateMapper();
